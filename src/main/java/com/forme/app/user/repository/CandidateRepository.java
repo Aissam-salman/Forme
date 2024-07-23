@@ -1,7 +1,7 @@
 package com.forme.app.user.repository;
 
 
-import com.forme.app.user.model.Client;
+import com.forme.app.user.model.Candidate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -9,12 +9,12 @@ import java.util.Optional;
 /**
  * The interface Client repository.
  */
-public interface ClientRepository extends JpaRepository<Client, Long> {
+public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     /**
      * Find by email optional.
      *
      * @param email the email
      * @return the optional
      */
-    Optional<Client> findByEmail(String email);
+    Optional<Candidate> findByEmail(String email);
 }

@@ -1,7 +1,9 @@
 package com.forme.app.user.model;
 
+import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -17,7 +19,6 @@ import java.util.List;
  */
 @Data
 @SuperBuilder
-@NoArgsConstructor
 @Entity
 @Table(name = "_user")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -32,10 +33,15 @@ abstract public class User implements UserDetails {
 
     private String email;
 
+    private String phone_number;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications;
 
     /**
      * Instantiates a new User.
