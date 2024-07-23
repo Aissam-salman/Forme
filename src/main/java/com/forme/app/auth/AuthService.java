@@ -50,14 +50,14 @@ public class AuthService {
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
                     .build();
-            case CLIENT -> Candidate.builder()
+            case CANDIDATE -> Candidate.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
                     .build();
-            case PRODUCER -> Former.builder()
+            case FORMER -> Former.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
                     .email(request.getEmail())

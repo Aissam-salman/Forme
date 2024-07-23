@@ -24,7 +24,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstname;

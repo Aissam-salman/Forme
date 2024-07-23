@@ -1,9 +1,6 @@
 package com.forme.app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * The type Center.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Center {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String address;

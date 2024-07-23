@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * The type Assessment.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -14,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Assessment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

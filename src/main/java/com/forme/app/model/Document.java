@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
+/**
+ * The type Document.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -15,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Document {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -26,4 +29,6 @@ public class Document {
     private String document_type;
 
     private Date creation_date;
+
+    private Long form_id_from_mongodb;
 }
