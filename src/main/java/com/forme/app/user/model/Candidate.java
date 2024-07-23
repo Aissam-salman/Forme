@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * The type Client.
@@ -19,6 +19,8 @@ import java.util.List;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "id")
-public class Client extends User {
+public class Candidate extends User {
+    private Date birthday;
 }
