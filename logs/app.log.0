@@ -1,3 +1,0 @@
-[2024-07-23 14:30:01.334] - 94091 INFO [restartedMain] --- org.apache.catalina.core.StandardService: Starting service [Tomcat]
-[2024-07-23 14:30:01.336] - 94091 INFO [restartedMain] --- org.apache.catalina.core.StandardEngine: Starting Servlet engine: [Apache Tomcat/10.1.25]
-[2024-07-23 14:30:01.368] - 94091 INFO [restartedMain] --- org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]: Initializing Spring embedded WebApplicationContext
