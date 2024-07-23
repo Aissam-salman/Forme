@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * The interface Producer repository.
  */
-public interface ProducerRepository extends JpaRepository<Former, Long> {
+public interface FormerRepository extends JpaRepository<Former, Long> {
     /**
      * Find by email optional.
      *

@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * The interface Client repository.
  */
-public interface ClientRepository extends JpaRepository<Candidate, Long> {
+public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     /**
      * Find by email optional.
      *
