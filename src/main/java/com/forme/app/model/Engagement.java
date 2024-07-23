@@ -31,4 +31,5 @@ public class Engagement {
 
     private boolean is_present;
     private String candidate_comments;
+                
 }

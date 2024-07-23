@@ -60,7 +60,7 @@ public class UserController {
         if (user.getRole() == Role.ADMIN) {
             return ResponseEntity.status(201).build();
         }
-        return ResponseEntity.ok(MapperDTO.convertToDto(userService.getUserById(id), UserDto.class));
+        return ResponseEntity.ok(MapperDTO.convertToDto(user, UserDto.class));
     }
 
     /**

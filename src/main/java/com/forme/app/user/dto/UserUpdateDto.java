@@ -18,4 +18,5 @@ public class UserUpdateDto {
     private String lastname;
     private String email;
     private String password;
+    private String phone_number;
 }

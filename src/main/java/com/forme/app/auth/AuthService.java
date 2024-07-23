@@ -49,6 +49,7 @@ public class AuthService {
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
+                    .phone_number(request.getPhone_number())
                     .build();
             case CANDIDATE -> Candidate.builder()
                     .firstname(request.getFirstname())
@@ -56,6 +57,7 @@ public class AuthService {
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
+                    .phone_number(request.getPhone_number())
                     .build();
             case FORMER -> Former.builder()
                     .firstname(request.getFirstname())
@@ -63,6 +65,7 @@ public class AuthService {
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
+                    .phone_number(request.getPhone_number())
                     .build();
         };
 
