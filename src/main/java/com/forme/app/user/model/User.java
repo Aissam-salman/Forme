@@ -19,8 +19,6 @@ import java.util.List;
  */
 @Data
 @SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "_user")
 @Inheritance(strategy = InheritanceType.JOINED)
