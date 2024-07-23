@@ -19,8 +19,8 @@ public class SwaggerConfig {
      */
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI().info(new Info().title("Marche du Finistere API 2").description("Spring REST API " +
-                "marketplace").version("v1.0.0"));
+        return new OpenAPI().info(new Info().title("Forme").description("Spring REST API " +
+                "form").version("v1.0.0"));
     }
 
 }

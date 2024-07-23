@@ -1,6 +1,5 @@
 package com.forme.app.auth.dto;
 
-import com.forme.app.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +15,4 @@ import lombok.NoArgsConstructor;
 public class AuthenticationRequest {
     private String email;
     private String password;
-    private Role role;
 }

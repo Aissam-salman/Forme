@@ -1,5 +1,7 @@
 package com.forme.app.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -17,13 +19,13 @@ import java.util.List;
  */
 @Data
 @SuperBuilder
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "_user")
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstname;
@@ -32,10 +34,15 @@ abstract public class User implements UserDetails {
 
     private String email;
 
+    private String phone_number;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications;
 
     /**
      * Instantiates a new User.
@@ -55,6 +62,7 @@ abstract public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
@@ -70,21 +78,25 @@ abstract public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
