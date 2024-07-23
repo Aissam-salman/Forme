@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,8 +22,6 @@ import java.util.List;
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "id")
 public class Candidate extends User {
-    private Date birthday;
-
     @OneToMany(mappedBy = "candidate")
     private List<Path> paths;
 }

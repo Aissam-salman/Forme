@@ -1,5 +1,6 @@
 package com.forme.app.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
@@ -61,6 +62,7 @@ abstract public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
@@ -76,21 +78,25 @@ abstract public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

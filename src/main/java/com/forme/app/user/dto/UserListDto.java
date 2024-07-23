@@ -18,5 +18,4 @@ public class UserListDto {
     private String lastname;
     private String email;
     private Role role;
-
 }
