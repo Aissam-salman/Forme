@@ -3,7 +3,6 @@ package com.forme.app.user.model;
 import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -20,6 +19,7 @@ import java.util.List;
 @Data
 @SuperBuilder
 @Entity
+@NoArgsConstructor
 @Table(name = "_user")
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract public class User implements UserDetails {
