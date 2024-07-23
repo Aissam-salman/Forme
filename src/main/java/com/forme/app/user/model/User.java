@@ -1,5 +1,6 @@
 package com.forme.app.user.model;
 
+import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,9 @@ abstract public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications;
 
     /**
      * Instantiates a new User.
