@@ -1,6 +1,5 @@
 package com.forme.app.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,15 +16,14 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FranceTravailAdvisor {
+public class Center {
     @Id
     @GeneratedValue
     private Long id;
-    private String firstname;
-    private String lastname;
-    private String email;
+    private String name;
+    private String address;
     private String phone_number;
 
-    @OneToMany(mappedBy = "ftAdvisor")
+    @OneToMany(mappedBy = "center")
     private List<Path> paths;
 }
