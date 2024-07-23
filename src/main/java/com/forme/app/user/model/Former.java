@@ -21,7 +21,6 @@ import java.util.List;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "id")
 public class Former extends User {
     @OneToMany(mappedBy = "former")

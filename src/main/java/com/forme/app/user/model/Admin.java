@@ -16,7 +16,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "id")
 public class Admin extends User {
 }

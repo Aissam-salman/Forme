@@ -28,7 +28,7 @@ public class Engagement {
     private Candidate candidate;
 
     @OneToMany(mappedBy = "engagement")
-    private List<Engagement> engagements;
+    private List<Assessment> assessments;
 
     private boolean is_present;
     private String candidate_comments;
