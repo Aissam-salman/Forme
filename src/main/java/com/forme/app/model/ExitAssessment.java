@@ -8,6 +8,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
+/**
+ * The type Exit assessment.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -15,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ExitAssessment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne

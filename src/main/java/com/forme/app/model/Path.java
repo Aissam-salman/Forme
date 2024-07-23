@@ -11,6 +11,9 @@ import lombok.experimental.SuperBuilder;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Path.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -18,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Path {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -36,10 +39,6 @@ public class Path {
     @ManyToOne
     @JoinColumn(name = "ft_advisor_id")
     private FranceTravailAdvisor ftAdvisor;
-
-    @ManyToOne
-    @JoinColumn(name = "workshop_session_id")
-    private WorkshopSession workshopSession;
 
     @OneToMany(mappedBy = "path")
     private List<Phase> phases;

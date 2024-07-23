@@ -7,7 +7,7 @@ public enum Role {
     /**
      * Client role.
      */
-    CLIENT,
+    CANDIDATE,
     /**
      * Admin role.
      */
@@ -15,5 +15,5 @@ public enum Role {
     /**
      * Producer role.
      */
-    PRODUCER
+    FORMER
 }
