@@ -5,12 +5,9 @@ import com.forme.app.auth.dto.AuthentificationResponse;
 import com.forme.app.auth.dto.RegisterRequest;
 import com.forme.app.config.JwtService;
 import com.forme.app.user.model.Admin;
-import com.forme.app.user.model.Client;
-import com.forme.app.user.model.Producer;
+import com.forme.app.user.model.Candidate;
+import com.forme.app.user.model.Former;
 import com.forme.app.user.model.User;
-import com.forme.app.user.repository.AdminRepository;
-import com.forme.app.user.repository.ClientRepository;
-import com.forme.app.user.repository.ProducerRepository;
 import com.forme.app.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,14 +50,14 @@ public class AuthService {
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
                     .build();
-            case CLIENT -> Client.builder()
+            case CLIENT -> Candidate.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
                     .build();
-            case PRODUCER -> Producer.builder()
+            case PRODUCER -> Former.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
                     .email(request.getEmail())
