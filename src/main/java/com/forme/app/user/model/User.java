@@ -5,7 +5,9 @@ import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +28,8 @@ import java.util.List;
 abstract public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
     private String firstname;
@@ -54,6 +58,15 @@ abstract public class User implements UserDetails {
      * @param role      the role
      */
     public User(String firstname, String lastname, String email, String password, Role role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(Long id, String firstname, String lastname, String email, String password, Role role) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
