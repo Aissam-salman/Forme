@@ -48,6 +48,8 @@ public class UserController {
 
 
     //TODO: get all candidate or former
+
+    //INFO: Websocket created for realtime if you needed
     @GetMapping("/candidates")
     @ResponseBody
     @Operation(summary = "Liste des candidats")

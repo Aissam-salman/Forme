@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class CandidateController {
+public class CandidateWebSocketController {
 
     private final SimpMessagingTemplate messagingTemplate;
     private final CandidateService candidateService;
 
-    public CandidateController(SimpMessagingTemplate messagingTemplate, CandidateService candidateService) {
+    public CandidateWebSocketController(SimpMessagingTemplate messagingTemplate, CandidateService candidateService) {
         this.messagingTemplate = messagingTemplate;
         this.candidateService = candidateService;
     }
