@@ -3,10 +3,12 @@ package com.forme.app.controller;
 
 import com.forme.app.auth.dto.AuthentificationResponse;
 import com.forme.app.user.Role;
+import com.forme.app.user.dto.CandidateDto;
 import com.forme.app.user.dto.UserDto;
 import com.forme.app.user.dto.UserListDto;
 import com.forme.app.user.dto.UserUpdateDto;
 import com.forme.app.user.model.User;
+import com.forme.app.user.service.CandidateService;
 import com.forme.app.user.service.UserService;
 import com.forme.app.utils.MapperDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,12 +23,13 @@ import java.util.List;
  * The type User controller.
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @Tag(name = "Users", description = "API gestion utilisateurs")
 @CrossOrigin(value = "*")
 public class UserController {
     private final UserService userService;
+    private final CandidateService candidateService;
 
     /**
      * Gets all users.
@@ -41,6 +44,18 @@ public class UserController {
                 .filter(user -> user.getRole() != Role.ADMIN)
                 .map(user -> MapperDTO.convertToDto(user, UserListDto.class)).toList();
         return ResponseEntity.ok(userListDtos);
+    }
+
+
+    //TODO: get all candidate or former
+    @GetMapping("/candidates")
+    @ResponseBody
+    @Operation(summary = "Liste des candidats")
+    public ResponseEntity<List<CandidateDto>> getAllCandidates() {
+        List<CandidateDto> candidates = candidateService.findAll().stream()
+                .map(candidate -> MapperDTO.convertToDto(candidate, CandidateDto.class))
+                .toList();
+        return ResponseEntity.ok(candidates);
     }
 
     /**

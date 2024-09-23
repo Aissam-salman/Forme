@@ -109,6 +109,7 @@ public class AuthService {
         return AuthentificationResponse.builder()
                 .token(token)
                 .id(user.getId())
+                .role(user.getRole())
                 .build();
     }
 }

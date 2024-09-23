@@ -33,6 +33,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
     /**
      * Gets user by id.
      *

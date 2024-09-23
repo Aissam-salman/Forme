@@ -1,5 +1,6 @@
 package com.forme.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forme.app.user.model.Candidate;
 import com.forme.app.user.model.Former;
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class Path {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
@@ -40,12 +42,15 @@ public class Path {
     @JoinColumn(name = "ft_advisor_id")
     private FranceTravailAdvisor ftAdvisor;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "path")
     private List<Phase> phases;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "path")
     private List<Document> documents;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "path")
     private ExitAssessment exitAssessment;
 
