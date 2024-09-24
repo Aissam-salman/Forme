@@ -20,19 +20,10 @@ public class SseController {
 
     @GetMapping(value = "/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter streamEvents() {
-        this.emitter = new SseEmitter();
-        // Logique pour envoyer des événements asynchrones
+        this.emitter = new SseEmitter(0L);
         return this.emitter;
     }
 
-
-    public void notifyClients() {
-        try {
-            emitter.send(SseEmitter.event().name("update").data("Candidates updated"));
-        } catch (IOException e) {
-            emitter.completeWithError(e);
-        }
-    }
 
     @Scheduled(fixedRate = 30000)
     public void heartbeat() throws IOException {
@@ -51,5 +42,17 @@ public class SseController {
                         .id("" + ++lastId)
                         .data(data)
         );
+    }
+
+    public <D> void notifyClients(D d) {
+        try {
+            this.emitter.send(SseEmitter.event()
+                    .name("update")
+                    .id("" + ++lastId)
+                    .data(d)
+            );
+        } catch (IOException e) {
+            this.emitter.completeWithError(e);
+        }
     }
 }
