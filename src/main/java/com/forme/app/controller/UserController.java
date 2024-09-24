@@ -60,6 +60,7 @@ public class UserController {
         return ResponseEntity.ok(candidates);
     }
 
+
     /**
      * Gets user by id.
      *
