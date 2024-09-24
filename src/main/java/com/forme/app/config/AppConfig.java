@@ -21,17 +21,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @RequiredArgsConstructor
-public class AppConfig implements WebMvcConfigurer {
+public class AppConfig {
 
     private final UserRepository userRepository;
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowCredentials(true);
-    }
 
     /**
      * User details service user details service.

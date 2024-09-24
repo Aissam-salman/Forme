@@ -8,6 +8,7 @@ import com.forme.app.controller.sse.SseController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(value = "*")
 public class AuthController {
     private final AuthService authService;
-    private final SseController sseController;
+
 
     /**
      * Register response entity.
@@ -32,7 +33,6 @@ public class AuthController {
     @SneakyThrows
     @PostMapping("/signup")
     public ResponseEntity<AuthentificationResponse> register(@RequestBody RegisterRequest request) {
-        sseController.notifyClients();
         return ResponseEntity.ok(authService.register(request));
     }
 
