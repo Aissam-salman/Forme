@@ -2,6 +2,7 @@ package com.forme.app.controller;
 
 
 import com.forme.app.auth.dto.AuthentificationResponse;
+import com.forme.app.user.dto.FormerDto;
 import com.forme.app.user.Role;
 import com.forme.app.user.dto.CandidateDto;
 import com.forme.app.user.dto.UserDto;
@@ -9,6 +10,7 @@ import com.forme.app.user.dto.UserListDto;
 import com.forme.app.user.dto.UserUpdateDto;
 import com.forme.app.user.model.User;
 import com.forme.app.user.service.CandidateService;
+import com.forme.app.user.service.FormerService;
 import com.forme.app.user.service.UserService;
 import com.forme.app.utils.MapperDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +32,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final CandidateService candidateService;
+    private final FormerService formerService;
 
     /**
      * Gets all users.
@@ -48,6 +51,14 @@ public class UserController {
 
 
     //TODO: get all candidate or former
+    @GetMapping("/formers")
+    @ResponseBody
+    @Operation(summary = "Liste de formateurs")
+    public ResponseEntity<List<FormerDto>> getAllFormers() {
+        List<FormerDto> formers = formerService.getAll().stream()
+                .map(former -> MapperDTO.convertToDto(former, FormerDto.class)).toList();
+        return ResponseEntity.ok(formers);
+    }
 
     //INFO: Websocket created for realtime if you needed
     @GetMapping("/candidates")

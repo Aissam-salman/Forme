@@ -45,7 +45,6 @@ public class AuthController {
     @SneakyThrows
     @PostMapping("/login")
     public ResponseEntity<AuthentificationResponse> login(@RequestBody AuthenticationRequest request) {
-        //TODO: add switch case role redirect
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
