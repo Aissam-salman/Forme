@@ -26,7 +26,7 @@ public class Path {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne  
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
