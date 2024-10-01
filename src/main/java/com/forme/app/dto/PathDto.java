@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClasseDto {
+public class PathDto {
     private Long id;
     private String center_name;
     private String former_name;
-    private String start_date;
-    private String end_date;
+    private LocalDate start_date;
+    private LocalDate end_date;
 }
