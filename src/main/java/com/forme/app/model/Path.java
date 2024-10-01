@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -54,9 +55,9 @@ public class Path {
     @OneToOne(mappedBy = "path")
     private ExitAssessment exitAssessment;
 
-    private Date start_date;
+    private LocalDate start_date;
 
-    private Date end_date;
+    private LocalDate end_date;
     private boolean adherence;
     private String non_adherence_reason;
 }
