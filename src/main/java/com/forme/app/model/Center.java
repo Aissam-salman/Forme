@@ -1,5 +1,6 @@
 package com.forme.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class Center {
     private String address;
     private String phone_number;
 
-    @OneToMany(mappedBy = "center")
+    @OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Path> paths;
 }
