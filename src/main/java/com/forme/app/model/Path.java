@@ -9,8 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Path {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonIgnore
@@ -44,20 +44,21 @@ public class Path {
     private FranceTravailAdvisor ftAdvisor;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "path")
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
     private List<Phase> phases;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "path")
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
     private List<Document> documents;
 
     @JsonIgnore
     @OneToOne(mappedBy = "path")
     private ExitAssessment exitAssessment;
 
-    private LocalDate start_date;
+    private Timestamp date_start;
 
-    private LocalDate end_date;
+    private Timestamp date_end;
+
     private boolean adherence;
     private String non_adherence_reason;
 }

@@ -1,6 +1,7 @@
 package com.forme.app.controller;
 
 import com.forme.app.dto.PathDto;
+import com.forme.app.dto.PathListDto;
 import com.forme.app.model.Path;
 import com.forme.app.service.PathService;
 import com.forme.app.utils.MapperDTO;
@@ -24,9 +25,16 @@ public class PathController {
     @GetMapping
     @ResponseBody
     @Operation(summary = "Liste des classes")
-    public ResponseEntity<List<PathDto>> getAll(){
-        List<PathDto> classes = pathService.getAll().stream().map(classe -> MapperDTO.convertToDto(classe,
-                PathDto.class)).toList();
+    public ResponseEntity<List<PathListDto>> getAll(){
+        List<Path> paths = pathService.getAll();
+        paths.forEach(path -> {
+            System.out.println("Path ID: " + path.getId());
+            System.out.println("Start Date: " + path.getDate_start());
+            System.out.println("End Date: " + path.getDate_end());
+        });
+        List<PathListDto> classes = paths.stream()
+                .map(classe -> MapperDTO.convertToDto(classe, PathListDto.class))
+                .toList();
         return ResponseEntity.ok(classes);
     }
 
@@ -35,6 +43,8 @@ public class PathController {
     @ResponseBody
     @Operation(summary = "Créer une nouvelle classe")
     public ResponseEntity<PathDto> create(@RequestBody PathDto classeDto){
+        System.out.println(classeDto);
+
         Path path = pathService.create(classeDto);
         if (path == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(MapperDTO.convertToDto(path,PathDto.class));
