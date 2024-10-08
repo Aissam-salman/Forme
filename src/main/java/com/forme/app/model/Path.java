@@ -36,7 +36,7 @@ public class Path {
     private Center center;
 
     @ManyToOne
-    @JoinColumn(name = "former_id")
+    @JoinColumn(name = "former_id", nullable = false)
     private Former former;
 
     @ManyToOne

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Form {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String title;
     private String description;
@@ -24,6 +24,7 @@ public class Form {
     @ManyToOne
     @JoinColumn(name = "former_id")
     private Former former;
+
     private Long createdAt;
     private Long updatedAt;
 }
