@@ -1,6 +1,7 @@
 package com.forme.app.model;
-import jakarta.persistence.*;
+
 import com.forme.app.user.model.Former;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
