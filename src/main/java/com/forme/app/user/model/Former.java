@@ -2,6 +2,7 @@ package com.forme.app.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forme.app.model.Assessment;
+import com.forme.app.model.Form;
 import com.forme.app.model.Path;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,4 +34,8 @@ public class Former extends User {
     @OneToMany(mappedBy = "former", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Assessment> assessments;
+
+    @OneToMany(mappedBy = "former", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Form> forms;
 }
