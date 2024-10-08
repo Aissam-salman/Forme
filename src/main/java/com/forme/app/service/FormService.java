@@ -17,7 +17,7 @@ public class FormService {
         return formRepository.findAll();
     }
 
-    public Form findById(String id) {
+    public Form findById(Long id) {
         return formRepository.findById(id).orElseThrow();
     }
 
@@ -25,7 +25,7 @@ public class FormService {
         return formRepository.save(form);
     }
 
-    public boolean delete(String id) {
+    public boolean delete(Long id) {
         try {
 
         formRepository.delete(findById(id));
@@ -39,9 +39,4 @@ public class FormService {
     public Form findByName(String title) {
         return formRepository.findAllByTitle(title);
     }
-
-    public List<Form> findByUpdatedAfter(Timestamp timestamp) {
-        return formRepository.findAllByUpdatedAtAfter(timestamp);
-    }
-
 }
