@@ -4,11 +4,9 @@ import com.forme.app.auth.AuthService;
 import com.forme.app.auth.dto.AuthenticationRequest;
 import com.forme.app.auth.dto.AuthentificationResponse;
 import com.forme.app.auth.dto.RegisterRequest;
-import com.forme.app.controller.sse.SseController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

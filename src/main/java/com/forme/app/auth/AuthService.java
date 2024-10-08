@@ -4,17 +4,12 @@ import com.forme.app.auth.dto.AuthenticationRequest;
 import com.forme.app.auth.dto.AuthentificationResponse;
 import com.forme.app.auth.dto.RegisterRequest;
 import com.forme.app.config.JwtService;
-import com.forme.app.controller.sse.SseController;
-import com.forme.app.user.Role;
-import com.forme.app.user.dto.UserDto;
 import com.forme.app.user.model.Admin;
 import com.forme.app.user.model.Candidate;
 import com.forme.app.user.model.Former;
 import com.forme.app.user.model.User;
 import com.forme.app.user.repository.UserRepository;
-import com.forme.app.utils.MapperDTO;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +29,6 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    private final SseController sseController;
 
     /**
      * Register authentification response.
@@ -47,6 +41,7 @@ public class AuthService {
         if (request.getRole() == null) {
             return null;
         }
+
 
         User user = switch (request.getRole()) {
             case ADMIN -> Admin.builder()
@@ -78,10 +73,6 @@ public class AuthService {
         assert user != null;
 
         userRepository.save(user);
-
-        if (user.getRole() == Role.CANDIDATE) {
-            sseController.notifyClients(MapperDTO.convertToDto(user, UserDto.class));
-        }
 
         var jwtToken = jwtService.generateToken(new HashMap<>(), user);
 
