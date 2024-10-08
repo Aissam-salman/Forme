@@ -47,7 +47,7 @@ public class FormController {
     @GetMapping("/{formId}")
     @ResponseBody
     @Operation(summary = "Trouver un formulaire grace à son Id")
-    public ResponseEntity<FormDto> getById(@PathVariable String formId) {
+    public ResponseEntity<FormDto> getById(@PathVariable Long formId) {
         try {
             Form form = formService.findById(formId);
             return  ResponseEntity.ok(MapperDTO.convertToDto(form, FormDto.class));
@@ -60,7 +60,7 @@ public class FormController {
     @DeleteMapping("/{id}")
     @ResponseBody
     @Operation(summary = "Supprimer un formulaire grace à son Id")
-    public ResponseEntity delete(@PathVariable String id) {
+    public ResponseEntity delete(@PathVariable Long id) {
         boolean res = formService.delete(id);
         if (res)  {
             return ResponseEntity.noContent().build();
