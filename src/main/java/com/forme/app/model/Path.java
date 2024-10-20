@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -54,6 +53,15 @@ public class Path {
     @JsonIgnore
     @OneToOne(mappedBy = "path")
     private ExitAssessment exitAssessment;
+
+    @ManyToMany
+    @JoinTable(
+            name = "path_candidates",
+            joinColumns = @JoinColumn(name = "path_id"),
+            inverseJoinColumns = @JoinColumn(name = "candidate_id")
+    )
+    private List<Candidate> candidates;
+
 
     private Timestamp date_start;
 

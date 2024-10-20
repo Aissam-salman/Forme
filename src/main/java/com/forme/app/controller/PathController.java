@@ -49,6 +49,13 @@ public class PathController {
         if (path == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(MapperDTO.convertToDto(path,PathDto.class));
     }
+    @PostMapping("/{pathId}/candidates")
+    @ResponseBody
+    @Operation(summary = "Ajouter des candidats à une classe existante")
+    public ResponseEntity<PathDto> addCandidates(@PathVariable Long pathId, @RequestBody List<String> candidateIds) {
+        Path path = pathService.addCandidatesToPath(pathId, candidateIds);
+        return ResponseEntity.ok(MapperDTO.convertToDto(path, PathDto.class));
+    }
 
     // delete classes
     @DeleteMapping("/{classeId}")

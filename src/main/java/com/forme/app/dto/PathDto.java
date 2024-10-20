@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Data
@@ -14,7 +15,7 @@ public class PathDto {
     private Long id;
     private String center_id;
     private String former_id;
-
+    private List<String> candidate_ids;
     private Timestamp date_start;
     private Timestamp date_end;
 
