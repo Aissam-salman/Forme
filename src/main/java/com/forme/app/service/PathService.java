@@ -5,17 +5,15 @@ import com.forme.app.model.Center;
 import com.forme.app.model.Path;
 import com.forme.app.repository.CenterRepository;
 import com.forme.app.repository.PathRepository;
+import com.forme.app.user.model.Candidate;
 import com.forme.app.user.model.Former;
+import com.forme.app.user.repository.CandidateRepository;
 import com.forme.app.user.repository.FormerRepository;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.stream.Collectors;
+import com.forme.app.model.Phase;
 
 
 @Service
@@ -24,14 +22,15 @@ public class PathService {
     private final PathRepository pathRepository;
     private final CenterRepository centerRepository;
     private final FormerRepository formerRepository;
-
+    private final CandidateRepository candidateRepository;
+    private final PhaseService phaseService;
     public List<Path> getAll() {
         return pathRepository.findAll();
     }
 
     public Path create(PathDto pathDto){
-        var centerId = Long.parseLong(pathDto.getCenter_id());
-        var formerId = Long.parseLong(pathDto.getFormer_id());
+        var centerId = Long.parseLong(pathDto.getCenterId());
+        var formerId = Long.parseLong(pathDto.getFormerId());
 
         Center center = centerRepository.findById(centerId).orElseThrow();
         Former former = formerRepository.findById(formerId).orElseThrow();
@@ -42,16 +41,33 @@ public class PathService {
                 .date_end(pathDto.getDate_end())
                 .build();
 
+
         try {
-            Path savedPath = pathRepository.save(path);
+            path = pathRepository.save(path);
+
+            // Initialize phases and workshops for the path
+            List<Phase> phases = phaseService.initializePhases();
+            path.setPhases(phases);
+            path = pathRepository.save(path);
         } catch (Exception e) {
             System.err.println("Error saving path: " + e.getMessage());
+            return null;
         }
 
         return path;
     }
 
+    public Path addCandidatesToPath(Long pathId, List<String> candidateIds) {
+        Path path = pathRepository.findById(pathId).orElseThrow();
+        List<Candidate> candidates = candidateIds.stream()
+                .map(Long::parseLong)
+                .map(candidateRepository::findById)
+                .map(optional -> optional.orElseThrow())
+                .collect(Collectors.toList());
 
+        path.getCandidates().addAll(candidates);
+        return pathRepository.save(path);
+    }
 
     public boolean delete(Long id){
         try {
@@ -63,6 +79,5 @@ public class PathService {
     }
 
     public Path getById(Long id) {
-        return pathRepository.findById(id).orElse(null);
-    }
-}
+        return pathRepository.findWithDetailsById(id).orElse(null);
+    }}

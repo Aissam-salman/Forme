@@ -9,11 +9,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/classes")
 @RequiredArgsConstructor
@@ -49,6 +51,13 @@ public class PathController {
         if (path == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(MapperDTO.convertToDto(path,PathDto.class));
     }
+    @PostMapping("/{pathId}/candidates")
+    @ResponseBody
+    @Operation(summary = "Ajouter des candidats à une classe existante")
+    public ResponseEntity<PathDto> addCandidates(@PathVariable Long pathId, @RequestBody List<String> candidateIds) {
+        Path path = pathService.addCandidatesToPath(pathId, candidateIds);
+        return ResponseEntity.ok(MapperDTO.convertToDto(path, PathDto.class));
+    }
 
     // delete classes
     @DeleteMapping("/{classeId}")
@@ -64,9 +73,21 @@ public class PathController {
     @GetMapping("/{classeId}")
     @ResponseBody
     @Operation(summary = "Trouver une classe par id")
-    public ResponseEntity<PathDto> getById(@PathVariable Long classeId){
+    public ResponseEntity<PathDto> getById(@PathVariable Long classeId) {
         Path path = pathService.getById(classeId);
         if (path == null) return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(MapperDTO.convertToDto(path,PathDto.class));
+
+      path.getFormer().getFirstname();
+      path.getCenter().getName();
+      path.getCandidates().size();
+
+        System.out.println("Path ID: " + path.getId());
+        System.out.println("Start Date: " + path.getDate_start());
+        System.out.println("End Date: " + path.getDate_end());
+        System.out.printf("Former: %s %s\n", path.getFormer().getFirstname(), path.getFormer().getLastname());
+        System.out.printf("Center: %s\n", path.getCenter().getName());
+        System.out.printf("Candidates: %s\n", path.getCandidates().stream().map(candidate -> candidate.getFirstname() + " " + candidate.getLastname()).toList());
+
+        return ResponseEntity.ok(MapperDTO.convertToDto(path, PathDto.class));
     }
 }
