@@ -13,10 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 public class PathDto {
     private Long id;
-    private String center_id;
-    private String former_id;
-    private List<String> candidate_ids;
+    private String centerId;
+    private String formerId;
+    private List<String> candidateIds;
     private Timestamp date_start;
     private Timestamp date_end;
+    private boolean adherence;
+    private String nonAdherenceReason;
 
 }

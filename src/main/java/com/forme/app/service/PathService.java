@@ -11,9 +11,6 @@ import com.forme.app.user.repository.CandidateRepository;
 import com.forme.app.user.repository.FormerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.forme.app.model.Phase;
@@ -32,8 +29,8 @@ public class PathService {
     }
 
     public Path create(PathDto pathDto){
-        var centerId = Long.parseLong(pathDto.getCenter_id());
-        var formerId = Long.parseLong(pathDto.getFormer_id());
+        var centerId = Long.parseLong(pathDto.getCenterId());
+        var formerId = Long.parseLong(pathDto.getFormerId());
 
         Center center = centerRepository.findById(centerId).orElseThrow();
         Former former = formerRepository.findById(formerId).orElseThrow();
@@ -43,6 +40,7 @@ public class PathService {
                 .date_start(pathDto.getDate_start())
                 .date_end(pathDto.getDate_end())
                 .build();
+
 
         try {
             path = pathRepository.save(path);
@@ -81,6 +79,5 @@ public class PathService {
     }
 
     public Path getById(Long id) {
-        return pathRepository.findById(id).orElse(null);
-    }
-}
+        return pathRepository.findWithDetailsById(id).orElse(null);
+    }}
