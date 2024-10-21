@@ -35,3 +35,5 @@ build/
 .vscode/
 sendgrid.env
 
+src/main/java/com/forme/app/auth/service/EmailService.java
+src/main/java/com/forme/app/auth/service/EmailService.java~
