@@ -1,8 +1,10 @@
 package com.forme.app.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
 
 /**
  * The type Security config.
@@ -33,6 +36,8 @@ public class SecurityConfig {
      * @return the security filter chain
      * @throws Exception the exception
      */
+    @Autowired
+    private Environment env;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -56,6 +61,9 @@ public class SecurityConfig {
                 });
 
         return http.build();
+    }
+    private boolean isDevProfileActive() {
+        return env.acceptsProfiles("dev");
     }
 
     /**
