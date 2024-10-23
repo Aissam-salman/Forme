@@ -17,7 +17,7 @@ target/
 *.iws
 *.iml
 *.ipr
-
+.idea/
 /logs/
 *.key
 
@@ -33,5 +33,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
 sendgrid.env
-application.properties

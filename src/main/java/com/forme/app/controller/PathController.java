@@ -7,13 +7,13 @@ import com.forme.app.service.PathService;
 import com.forme.app.utils.MapperDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -89,5 +89,76 @@ public class PathController {
         System.out.printf("Candidates: %s\n", path.getCandidates().stream().map(candidate -> candidate.getFirstname() + " " + candidate.getLastname()).toList());
 
         return ResponseEntity.ok(MapperDTO.convertToDto(path, PathDto.class));
+    }
+
+    // Vers  getWorkshops() pour test renvoie les ateliers d'une classe donnée
+    //TODO: A supprimer après test et Mettre dans WorkshopController
+    @GetMapping("/workshops")
+    @ResponseBody
+    @Operation(summary = "Liste des ateliers d'une classe")
+    public ResponseEntity<List<Map<String, Object>>> getWorkshops() {
+        List<Map<String, Object>> workshops = List.of(
+                Map.of(
+                        "id", 1,
+                        "name", "Atelier 1 : Co-construire son parcours",
+                        "startDate", "2024-01-01",
+                        "learnings", "Some learnings for workshop 1"
+                ),
+                Map.of(
+                        "id", 2,
+                        "name", "Atelier 2 : Découvrir son métier et consolider son projet professionnel",
+                        "startDate", "2024-02-01",
+                        "learnings", "Some learnings for workshop 2"
+                ),
+                Map.of(
+                        "id", 9,
+                        "name", "Atelier 9 : se construire un territoire facilitant",
+                        "startDate", "2024-03-01",
+                        "learnings", "Some learnings for workshop 9"
+                ),
+                Map.of(
+                        "id", 10,
+                        "name", "Atelier 10 : Cartographier ses compétences",
+                        "startDate", "2024-04-01",
+                        "learnings", "Some learnings for workshop 10"
+                ),
+                Map.of(
+                        "id", 3,
+                        "name", "Atelier 3 : Renforcer ses compétences numériques",
+                        "startDate", "2024-05-01",
+                        "learnings", "Some learnings for workshop 3"
+                ),
+                Map.of(
+                        "id", 4,
+                        "name", "Atelier 4 : Développer ses compétences de bases",
+                        "startDate", "2024-06-01",
+                        "learnings", "Some learnings for workshop 4"
+                ),
+                Map.of(
+                        "id", 5,
+                        "name", "Atelier 5 : Sécuriser son parcours",
+                        "startDate", "2024-07-01",
+                        "learnings", "Some learnings for workshop 5"
+                ),
+                Map.of(
+                        "id", 8,
+                        "name", "Atelier 8 : Découvrir le CPF",
+                        "startDate", "2024-08-01",
+                        "learnings", "Some learnings for workshop 8"
+                ),
+                Map.of(
+                        "id", 6,
+                        "name", "Atelier 6 : Concrétiser son projet de professionnalisation",
+                        "startDate", "2024-09-01",
+                        "learnings", "Some learnings for workshop 6"
+                ),
+                Map.of(
+                        "id", 0,
+                        "name", "Bilan de sortie",
+                        "startDate", "2024-10-01",
+                        "learnings", " "
+                )
+        );
+        return ResponseEntity.ok(workshops);
     }
 }
