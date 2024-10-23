@@ -15,8 +15,8 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
-
-    private final String sendGridApiKey = System.getenv("SENDGRID_API_KEY");
+    @Value("${spring.sendgrid.api-key}")
+    private String sendGridApiKey;
 
 
     public void sendPasswordResetEmail(String to, String token) {
