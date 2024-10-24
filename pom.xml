@@ -102,14 +102,6 @@
             <scope>runtime</scope>
         </dependency>
 
-
-        <!-- SpringDoc OpenAPI Dependencies -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
-        </dependency>
-
         <!-- JAVA Mail Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -142,7 +134,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <scope>42.2.23</scope>
         </dependency>
     </dependencies>
 

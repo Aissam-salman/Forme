@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="forme@0.0.0.0" uuid="e4ba977c-548f-43be-9d75-8c6503bbaa65">
+    <data-source source="LOCAL" name="PostgreSQL" uuid="b63d217b-721f-4fc6-9869-7de896687527">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <configured-by-url>true</configured-by-url>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://0.0.0.0:5432/forme</jdbc-url>
+      <jdbc-url>http://ep-withered-fire-a29gfk34.eu-central-1.aws.neon.tech/forme?user=forme_owner&amp;password=9Sfn4McHksGE&amp;sslmode=require</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="forme@ep-withered-fire-a29gfk34.eu-central-1.aws.neon.tech" uuid="bdc01b04-ad54-4ebe-87e7-25ec80376de8">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ep-withered-fire-a29gfk34.eu-central-1.aws.neon.tech/forme?user=forme_owner&amp;password=9Sfn4McHksGE&amp;sslmode=require</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
