@@ -1,5 +1,6 @@
 package com.forme.app.controller;
 
+import com.forme.app.dto.CreatePathDto;
 import com.forme.app.dto.PathDto;
 import com.forme.app.dto.PathListDto;
 import com.forme.app.model.Path;
@@ -29,11 +30,7 @@ public class PathController {
     @Operation(summary = "Liste des classes")
     public ResponseEntity<List<PathListDto>> getAll(){
         List<Path> paths = pathService.getAll();
-        paths.forEach(path -> {
-            System.out.println("Path ID: " + path.getId());
-            System.out.println("Start Date: " + path.getDate_start());
-            System.out.println("End Date: " + path.getDate_end());
-        });
+
         List<PathListDto> classes = paths.stream()
                 .map(classe -> MapperDTO.convertToDto(classe, PathListDto.class))
                 .toList();
@@ -44,9 +41,7 @@ public class PathController {
     @PostMapping
     @ResponseBody
     @Operation(summary = "Créer une nouvelle classe")
-    public ResponseEntity<PathDto> create(@RequestBody PathDto classeDto){
-        System.out.println(classeDto);
-
+    public ResponseEntity<PathDto> create(@RequestBody CreatePathDto classeDto){
         Path path = pathService.create(classeDto);
         if (path == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(MapperDTO.convertToDto(path,PathDto.class));
@@ -54,7 +49,7 @@ public class PathController {
     @PostMapping("/{pathId}/candidates")
     @ResponseBody
     @Operation(summary = "Ajouter des candidats à une classe existante")
-    public ResponseEntity<PathDto> addCandidates(@PathVariable Long pathId, @RequestBody List<String> candidateIds) {
+    public ResponseEntity<PathDto> addCandidates(@PathVariable Long pathId, @RequestBody String candidateIds) {
         Path path = pathService.addCandidatesToPath(pathId, candidateIds);
         return ResponseEntity.ok(MapperDTO.convertToDto(path, PathDto.class));
     }
@@ -76,17 +71,6 @@ public class PathController {
     public ResponseEntity<PathDto> getById(@PathVariable Long classeId) {
         Path path = pathService.getById(classeId);
         if (path == null) return ResponseEntity.badRequest().build();
-
-      path.getFormer().getFirstname();
-      path.getCenter().getName();
-      path.getCandidates().size();
-
-        System.out.println("Path ID: " + path.getId());
-        System.out.println("Start Date: " + path.getDate_start());
-        System.out.println("End Date: " + path.getDate_end());
-        System.out.printf("Former: %s %s\n", path.getFormer().getFirstname(), path.getFormer().getLastname());
-        System.out.printf("Center: %s\n", path.getCenter().getName());
-        System.out.printf("Candidates: %s\n", path.getCandidates().stream().map(candidate -> candidate.getFirstname() + " " + candidate.getLastname()).toList());
 
         return ResponseEntity.ok(MapperDTO.convertToDto(path, PathDto.class));
     }

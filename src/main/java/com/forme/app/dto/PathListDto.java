@@ -16,17 +16,12 @@ public class PathListDto {
     private Long id;
     private Center center;  
     private Former former;
-
     private Date date_start;
-
     private Date date_end;
-
     public String getCenter() {
         return center.getName();
     }
-
     public String getFormer() {
         return former.getLastname();
     }
-
 }

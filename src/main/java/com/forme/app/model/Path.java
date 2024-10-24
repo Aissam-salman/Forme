@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Path {
     @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonIgnore
@@ -54,12 +54,8 @@ public class Path {
     @OneToOne(mappedBy = "path")
     private ExitAssessment exitAssessment;
 
-    @ManyToMany
-    @JoinTable(
-            name = "path_candidates",
-            joinColumns = @JoinColumn(name = "path_id"),
-            inverseJoinColumns = @JoinColumn(name = "candidate_id")
-    )
+    @JsonIgnore
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
     private List<Candidate> candidates;
 
 
