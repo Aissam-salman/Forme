@@ -1,8 +1,8 @@
 # Forme 
 
 - Java spring boot application 
-- JS with ReactJS
-- MongoDB and Mysql 
+- TS with ReactJS
+- Postgresql
 - ...
 
 
