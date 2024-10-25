@@ -1,5 +1,6 @@
 package com.forme.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forme.app.user.model.Candidate;
 import com.forme.app.user.model.Former;
 import jakarta.persistence.*;
@@ -8,9 +9,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * The type Path.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -18,41 +22,47 @@ import java.util.List;
 @AllArgsConstructor
 public class Path {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne  
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "center_id")
     private Center center;
 
-    @ManyToOne
-    @JoinColumn(name = "former_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "former_id", nullable = false)
     private Former former;
 
     @ManyToOne
     @JoinColumn(name = "ft_advisor_id")
     private FranceTravailAdvisor ftAdvisor;
 
-    @ManyToOne
-    @JoinColumn(name = "workshop_session_id")
-    private WorkshopSession workshopSession;
-
-    @OneToMany(mappedBy = "path")
+    @JsonIgnore
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
     private List<Phase> phases;
 
-    @OneToMany(mappedBy = "path")
+    @JsonIgnore
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
     private List<Document> documents;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "path")
     private ExitAssessment exitAssessment;
 
-    private Date start_date;
+    @JsonIgnore
+    @OneToMany(mappedBy = "path", fetch = FetchType.LAZY)
+    private List<Candidate> candidates;
 
-    private Date end_date;
+
+    private Timestamp date_start;
+
+    private Timestamp date_end;
+
     private boolean adherence;
     private String non_adherence_reason;
 }

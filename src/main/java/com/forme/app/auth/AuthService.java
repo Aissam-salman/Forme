@@ -42,6 +42,7 @@ public class AuthService {
             return null;
         }
 
+
         User user = switch (request.getRole()) {
             case ADMIN -> Admin.builder()
                     .firstname(request.getFirstname())
@@ -49,20 +50,23 @@ public class AuthService {
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
+                    .phone_number(request.getPhone_number())
                     .build();
-            case CLIENT -> Candidate.builder()
+            case CANDIDATE -> Candidate.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
+                    .phone_number(request.getPhone_number())
                     .build();
-            case PRODUCER -> Former.builder()
+            case FORMER -> Former.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
+                    .phone_number(request.getPhone_number())
                     .build();
         };
 
@@ -92,14 +96,19 @@ public class AuthService {
         Optional<User> userData = userRepository.findByEmail(request.getEmail());
 
         if (userData.isEmpty()) {
-            return new AuthentificationResponse("Invalid email or password");
+            throw new Exception("Invalid email or password");
         }
 
         User user = userData.get();
+        if (user.getId() == null) {
+            throw new Exception("User ID is null");
+        }
 
         var token = jwtService.generateToken(user);
         return AuthentificationResponse.builder()
                 .token(token)
+                .id(user.getId())
+                .role(user.getRole())
                 .build();
     }
 }

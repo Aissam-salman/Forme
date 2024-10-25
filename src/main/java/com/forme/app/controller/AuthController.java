@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthService authService;
 
+
     /**
      * Register response entity.
      *
@@ -42,7 +43,6 @@ public class AuthController {
     @SneakyThrows
     @PostMapping("/login")
     public ResponseEntity<AuthentificationResponse> login(@RequestBody AuthenticationRequest request) {
-        //TODO: add switch case role redirect
         return ResponseEntity.ok(authService.authenticate(request));
     }
 

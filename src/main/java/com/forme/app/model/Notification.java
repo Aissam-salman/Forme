@@ -9,6 +9,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.security.Timestamp;
 
+/**
+ * The type Notification.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -16,7 +19,7 @@ import java.security.Timestamp;
 @AllArgsConstructor
 public class Notification {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

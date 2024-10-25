@@ -9,6 +9,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
+/**
+ * The type Engagement.
+ */
 @Entity
 @Data
 @SuperBuilder
@@ -16,12 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Engagement {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "workshop_session_id")
-    private WorkshopSession workshopSession;
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")
@@ -32,4 +31,5 @@ public class Engagement {
 
     private boolean is_present;
     private String candidate_comments;
+                
 }

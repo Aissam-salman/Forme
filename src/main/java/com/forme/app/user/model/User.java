@@ -1,11 +1,13 @@
 package com.forme.app.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.forme.app.model.Notification;
 import com.forme.app.user.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,11 +22,14 @@ import java.util.List;
 @Data
 @SuperBuilder
 @Entity
+@NoArgsConstructor
 @Table(name = "_user")
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
     private String firstname;
@@ -60,7 +65,17 @@ abstract public class User implements UserDetails {
         this.role = role;
     }
 
+    public User(Long id, String firstname, String lastname, String email, String password, Role role) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
@@ -76,21 +91,25 @@ abstract public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

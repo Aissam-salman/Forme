@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -16,15 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class WorkshopSession {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+    private LocalDate date;
+    private String location;
+
     @OneToMany(mappedBy = "workshopSession")
-    private List<Path> paths;
+    private List<Feedback> feedbacks;
 
-    @OneToOne(mappedBy = "workshopSession")
-    private Engagement engagement;
-
-    private Date start_date;
-    private Date end_date;
+    @OneToMany(mappedBy = "workshopSession")
+    private List<WorkshopAttendance> attendances;
 }

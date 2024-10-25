@@ -1,7 +1,11 @@
 package com.forme.app.utils;
 
 
+import com.forme.app.dto.PathDto;
+import com.forme.app.model.Path;
 import org.modelmapper.ModelMapper;
+
+import java.util.stream.Collectors;
 
 /**
  * The type Mapper dto.
